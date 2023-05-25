@@ -9,8 +9,8 @@ export enum ROLES {
   CUSTOMER = 'CUSTOMER',
 }
 
-@Entity({ name: 'roles' })
 @ObjectType()
+@Entity({ name: 'roles' })
 export class Role extends EntityBase {
   @PrimaryGeneratedColumn()
   @Field((type) => Int)
