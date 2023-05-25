@@ -35,6 +35,7 @@ type Query {
   getAllRoles: [Role!]!
   getRoleById(id: Int!): Role!
   getAllUsers: [User!]!
+  refreshToken: String!
 }
 
 type Mutation {
