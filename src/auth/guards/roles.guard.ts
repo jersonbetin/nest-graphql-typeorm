@@ -3,6 +3,8 @@ import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 import { ROLES } from 'src/users/entities/role.entity';
 import { ROLE_KEY } from '../decorators/roles.decorator';
+import { GqlExecutionContext } from '@nestjs/graphql';
+import { IS_PUBLIC } from '../decorators/public.decorator';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -15,12 +17,17 @@ export class RolesGuard implements CanActivate {
       context.getHandler(),
       context.getClass(),
     ]);
+    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
 
-    if (!roles) {
+    if (!roles || isPublic) {
       return true;
     }
 
-    const request = context.switchToHttp().getRequest();
+    const ctx = GqlExecutionContext.create(context).getContext();
+    const request = ctx.req;
 
     return roles.includes(request?.user?.role);
   }

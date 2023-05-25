@@ -34,13 +34,14 @@ import config from './config';
       driver: ApolloDriver,
       playground: true,
       autoSchemaFile: 'schema.gql',
-      // formatError: (error: GraphQLError) => {
-      //   const graphQLFormattedError: GraphQLFormattedError = {
-      //     message: error?.message,
-      //   };
+      formatError: (error: GraphQLError) => {
+        console.log(error);
+        const graphQLFormattedError: GraphQLFormattedError = {
+          message: error?.message,
+        };
 
-      //   return graphQLFormattedError;
-      // },
+        return graphQLFormattedError;
+      },
     }),
     AuthModule,
   ],

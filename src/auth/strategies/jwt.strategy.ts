@@ -5,7 +5,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import config from 'src/config';
 import { PayloadToken } from '../models/auth.model';
 
-const JWT_STRATEGY_NAME = 'jwt';
+export const JWT_STRATEGY_NAME = 'jwt';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, JWT_STRATEGY_NAME) {
   constructor(
@@ -19,6 +19,8 @@ export class JwtStrategy extends PassportStrategy(Strategy, JWT_STRATEGY_NAME) {
   }
 
   async validate(payload: PayloadToken) {
+    console.log('payload', payload);
+
     return payload;
   }
 }

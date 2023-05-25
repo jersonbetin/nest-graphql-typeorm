@@ -9,10 +9,12 @@ import { ResponseMessage } from 'src/common/commons.decorator';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { UseGuards } from '@nestjs/common';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { Public } from 'src/auth/decorators/public.decorator';
 
 @Resolver((of) => Role)
 @Roles(ROLES.ADMIN)
-@UseGuards(RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class RoleResolver {
   constructor(
     private roleService: RolesService,
