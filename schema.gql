@@ -1,0 +1,65 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Person {
+  id: Int!
+  firstName: String!
+  lastName: String
+  phone: String!
+  address: String
+  user: User!
+}
+
+type User {
+  id: String!
+  username: String!
+  password: String!
+  email: String!
+  role: Role!
+  person: Person!
+}
+
+type Role {
+  id: Int!
+  name: String!
+  users: [User!]!
+}
+
+type LoginResult {
+  user: User!
+  token: String!
+}
+
+type Query {
+  getAllRoles: [Role!]!
+  getRoleById(id: Int!): Role!
+  getAllUsers: [User!]!
+}
+
+type Mutation {
+  createRole(roleInput: CreateRoleInput!): Role!
+  createUser(personalInformationInput: PersonalInformationInput!): Person!
+  login(loginInput: LoginUserInput!): LoginResult!
+}
+
+input CreateRoleInput {
+  name: String!
+}
+
+input PersonalInformationInput {
+  username: String!
+  password: String!
+  email: String!
+  roleId: Float!
+  firstName: String!
+  lastName: String
+  phone: String!
+  address: String
+  userId: String
+}
+
+input LoginUserInput {
+  username: String!
+  password: String!
+}

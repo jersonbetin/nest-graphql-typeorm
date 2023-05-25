@@ -33,12 +33,12 @@ export class User extends EntityBase {
   @Field()
   email: string;
 
+  @Field(() => Role)
   @ManyToOne(() => Role, (role) => role.users)
   @JoinColumn({ name: 'role_id' })
-  @Field(() => Role)
   role: Role;
 
-  @OneToOne(() => Person, (person) => person.user)
   @Field(() => Person)
+  @OneToOne(() => Person, (person) => person.user)
   person: Person;
 }

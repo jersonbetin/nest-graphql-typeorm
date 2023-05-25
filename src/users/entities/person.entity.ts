@@ -22,7 +22,7 @@ export class Person extends EntityBase {
   firstName: string;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
-  @Field()
+  @Field({ nullable: true })
   lastName: string;
 
   @Column({ type: 'varchar', length: 255 })
@@ -30,8 +30,8 @@ export class Person extends EntityBase {
   phone: string;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
-  @Field()
-  address: string;
+  @Field({ nullable: true })
+  address?: string;
 
   @OneToOne(() => User, (user) => user.person, { nullable: false })
   @JoinColumn({ name: 'user_id' })
